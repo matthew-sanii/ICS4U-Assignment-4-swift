@@ -148,13 +148,13 @@ let triangleB = Double(sidelengthB) ?? 0
 let triangleC = Double(sidelengthC) ?? 0
 let triangle = Triangle(triangleA, triangleB, triangleC)
 if triangle.checkTriangle() && triangleA + triangleB + triangleC != 0 {
-  print(triangle.getArea())
-  print(triangle.getPerimeter())
-  print(triangle.getType())
+  print("The area of the triangle is", triangle.getArea(), "units squared.")
+  print("The perimeter of the triangle is", triangle.getPerimeter(), "units.")
+  print("The triangle is a(n)", triangle.getType(), "triangle.")
   triangle.getAngles()
   triangle.getHeights()
-  print(triangle.getInscribed())
-  print(triangle.getCircumcircle())
+  print(triangle.getInscribed(), "units.")
+  print(triangle.getCircumcircle(), "units squared.")
 } else {
   print("One or more of the values were not valid,",
     "please input values for a real triangle.")
