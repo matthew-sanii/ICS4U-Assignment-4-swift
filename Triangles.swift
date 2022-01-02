@@ -30,7 +30,7 @@ public class Triangle {
 
   private var lengthCSquared: Double = 0
 
-  private let pi: Double = 3.14
+  private let piValue: Double = 3.14
 
   init(_ sideA: Double, _ sideB: Double, _ sideC: Double) {
     lengthA = sideA
@@ -94,8 +94,8 @@ public class Triangle {
       / (2 * lengthB * lengthC)
     var angleB: Double = (lengthASquared + lengthCSquared - lengthBSquared)
       / (2 * lengthA * lengthC)
-    angleA = acos(angleA) * (180 / pi)
-    angleB = acos(angleB) * (180 / pi)
+    angleA = acos(angleA) * (180 / piValue)
+    angleB = acos(angleB) * (180 / piValue)
     let angleA2 = String(format: "%.1f", angleA)
     let angleB2 = String(format: "%.1f", angleB)
     angleA = Double(angleA2) ?? 0
@@ -113,7 +113,7 @@ public class Triangle {
     let height3 = (2 * (area / lengthC))
     let heightA = String(format: "Height with side length A as base is %.2f",
       height1)
-    let heightB = String(format: "Height with side length B as base is %.2f", 
+    let heightB = String(format: "Height with side length B as base is %.2f",
       height2)
     let heightC = String(format: "Height with side length C as base is %.2f",
       height3)
@@ -129,7 +129,7 @@ public class Triangle {
   }
 
   func getCircumcircle() -> String {
-    let circumcircleArea = pi * pow((lengthA * lengthB * lengthC)
+    let circumcircleArea = piValue * pow((lengthA * lengthB * lengthC)
       / (4 * area), 2)
     let answer = String(format: "The area of the circumcircle is %.2f",
       circumcircleArea)
@@ -143,7 +143,6 @@ print("Input second side length: ")
 let sidelengthB = readLine()!
 print("Input third side length: ")
 let sidelengthC = readLine()!
-
 let triangleA = Double(sidelengthA) ?? 0
 let triangleB = Double(sidelengthB) ?? 0
 let triangleC = Double(sidelengthC) ?? 0
