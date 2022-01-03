@@ -30,7 +30,9 @@ public class Triangle {
 
   private var lengthCSquared: Double = 0
 
-  private let piValue: Double = 3.14
+  private let angles: Double = 180
+
+  private let piValue: Double = 3.14159265359
 
   init(_ sideA: Double, _ sideB: Double, _ sideC: Double) {
     lengthA = sideA
@@ -39,22 +41,23 @@ public class Triangle {
     lengthASquared = pow(lengthA, 2)
     lengthBSquared = pow(lengthB, 2)
     lengthCSquared = pow(lengthC, 2)
+    semiPerm = (lengthA + lengthB + lengthC) / 2
   }
 
   func checkTriangle() -> Bool {
     let check1 = lengthA + lengthB
     let check2 = lengthB + lengthC
     let check3 = lengthC + lengthA
-    return (check1 >= lengthC && check2 >= lengthA && check3 >= lengthB)
+    return (check1 >= lengthC && check2 >= lengthA && check3 >= lengthB
+      && lengthA != semiPerm && lengthB != semiPerm && lengthC != semiPerm)
   }
 
   func getArea() -> Double {
-    semiPerm = (lengthA + lengthB + lengthC) / 2
     let preRoot = semiPerm * (semiPerm - lengthA) * (semiPerm - lengthB)
       * (semiPerm - lengthC)
     area = sqrt(preRoot)
-    let altered: Int = Int(area * 100)
-    area = Double(altered) / 100
+    let altered = String(format: "%.2f", area)
+    area = Double(altered) ?? 0
     return area
   }
 
@@ -94,17 +97,17 @@ public class Triangle {
       / (2 * lengthB * lengthC)
     var angleB: Double = (lengthASquared + lengthCSquared - lengthBSquared)
       / (2 * lengthA * lengthC)
-    angleA = acos(angleA) * (180 / piValue)
-    angleB = acos(angleB) * (180 / piValue)
-    let angleA2 = String(format: "%.1f", angleA)
-    let angleB2 = String(format: "%.1f", angleB)
-    angleA = Double(angleA2) ?? 0
-    angleB = Double(angleB2) ?? 0
-    let angleC2 = Double(180) - angleA - angleB
-    let angleC = String(format: "%.1f", angleC2)
-    print("Angle A is", angleA)
-    print("Angle B is", angleB)
-    print("Angle C is", angleC)
+    angleA = acos(angleA) * (angles / piValue)
+    angleB = acos(angleB) * (angles / piValue)
+    let angleA2 = String(format: "%.2f", angleA)
+    angleA = Double(angleA2)!
+    let angleB2 = String(format: "%.2f", angleB)
+    angleB = Double(angleB2)!
+    let angleC2 = angles - angleA - angleB
+    let angleC = String(format: "%.2f", angleC2)
+    print("Angle A is", angleA, "degrees.")
+    print("Angle B is", angleB, "degrees.")
+    print("Angle C is", angleC, "degrees.")
   }
 
   func getHeights() {
@@ -124,13 +127,14 @@ public class Triangle {
 
   func getInscribed() -> String {
     let inscribed = area / semiPerm
-    let inscribeRadius = String(format: "The radius of the inscribed circle is %.3f", inscribed)
+    let inscribeRadius = String(format: "The radius of the inscribed circle is %.2f", inscribed)
     return inscribeRadius
   }
 
   func getCircumcircle() -> String {
-    let circumcircleArea = piValue * pow((lengthA * lengthB * lengthC)
-      / (4 * area), 2)
+    var circumcircleArea: Double = (lengthA * lengthB * lengthC)
+      / (4 * area)
+    circumcircleArea = piValue * (pow(circumcircleArea, 2))
     let answer = String(format: "The area of the circumcircle is %.2f",
       circumcircleArea)
     return answer
